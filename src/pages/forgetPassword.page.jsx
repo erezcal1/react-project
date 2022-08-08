@@ -3,7 +3,7 @@ import { useState } from "react";
 import { useParams } from "react-router-dom";
 
 const ForgetPasswordPage = () => {
-  const { secretKey } = useParams();
+  const { secretKey, encryptedEmail } = useParams();
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
 
@@ -20,7 +20,7 @@ const ForgetPasswordPage = () => {
     if (password === confirmPassword) {
       //! Joi validation
       axios
-        .post(`/auth/recover-password/${secretKey}`, {
+        .post(`/auth/recover-password/${secretKey}/${encryptedEmail}`, {
           password: password,
           confirmPassword: confirmPassword,
         })
